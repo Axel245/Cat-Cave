@@ -47,6 +47,8 @@ function runSplash(deltaTime)
 	if(keyboard.isKeyDown(keyboard.KEY_SPACE))
 	{
 		gameState = STATE_GAME;
+		enemies = [];
+		initialize();
 		return;
 	}
 	context.drawImage(background, 0, 0);
@@ -60,6 +62,7 @@ function runGameOver(deltaTime)
 	{
 		gameState = STATE_SPLASH;
 			isdied = 4;
+			score= 0;
 		return;
 		
 	}
@@ -362,17 +365,18 @@ function runGame(deltaTime)
 	{
 		bullets[i].draw();
 	}
+	
 	context.restore();
 	if (player.isDead == true)
 	{
 		isdied -= 1;
 		if(isdied == 0)
 		{
-		gameState = STATE_GAMEOVER	
+		gameState = STATE_GAMEOVER
 		}
 		player.isDead = false;
 		player = new Player
-		
+		enemies.push();
 	}
 	if(isdied == 4)
 	{
@@ -403,6 +407,22 @@ function runGame(deltaTime)
 		enemies[i].update(deltaTime);
 		enemies[i].draw();
 	}
+		
+		for(var i=0; i<enemies.length; i++)
+		
+		{
+			if(intersects(
+			player.position.x - worldOffsetX - 5, player.position.y + 3, 
+			player.width/3, player.height/1.8,
+			enemies[i].position.x - worldOffsetX + 18, enemies[i].position.y, 
+			64/3, 64/1.8) == true)
+		{
+			enemies.splice(i, 1);
+			player.isDead = true
+			break;
+}
+}
+	
 	
 	
 	/////////////////////
@@ -437,7 +457,7 @@ function runGame(deltaTime)
 			break;
 		}	
 	}
-	
+
 	
 	
 	if(player.shootTimer > 0)
@@ -462,7 +482,7 @@ function runGame(deltaTime)
 	context.fillStyle = "white";
 	context.font = "32px Arial";
 	var scoreText = "Score: " + score;
-	context.fillText(scoreText, SCREEN_WIDTH - 170, 665);
+	context.fillText(scoreText, SCREEN_WIDTH - 180, 665);
 	
 	
 	//loives
@@ -508,8 +528,6 @@ function run()
 			break;
 	}
 }
-
-initialize();
 
 //-------------------- Don't modify anything below here
 

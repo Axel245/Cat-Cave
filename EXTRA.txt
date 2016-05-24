@@ -1,0 +1,6 @@
+context.strokeRect(player.position.x - 5, player.position.y + 3, player.width/3, player.height/1.8);
+	
+	for(var i = 0; i < enemies.length; i++)
+	{
+	context.strokeRect(enemies[i].position.x - worldOffsetX + 18, enemies[i].position.y, 64/3, 64/1.8);
+	}

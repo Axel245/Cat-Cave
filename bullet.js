@@ -4,7 +4,7 @@ var Bullet = function(x, y, moveRight)
 {
 	this.sprite = new Sprite("bullet.png");
 	this.sprite.buildAnimation(1, 1, 32, 32, -1, [0]);
-	this.sprite.setAnimationOffset(0, -65, 33);
+	this.sprite.setAnimationOffset(0, -10, 33);
 	this.sprite.setLoop(0, false);
 	
 	this.position = new Vector2();
@@ -28,5 +28,5 @@ Bullet.prototype.update = function(deltaTime)
 
 Bullet.prototype.draw = function()
 {
-	this.sprite.draw(context, this.position.x, this.position.y);
+	this.sprite.draw(context, this.position.x - worldOffsetX, this.position.y);
 };
